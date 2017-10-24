@@ -15,4 +15,4 @@ if [ -n "$DATABASE_URL" ]
 fi
 
 echo "Starting CTFd"
-gunicorn --bind 0.0.0.0:8000 -w 1 'CTFd:create_app()' --access-logfile '/opt/CTFd/CTFd/logs/access.log' --error-logfile '/opt/CTFd/CTFd/logs/error.log'
+gunicorn --bind 0.0.0.0:8000 -w ${WORKERS:-1} 'CTFd:create_app()' --access-logfile ${ACCESS_LOG:-/var/log/CTFd/access.log} --error-logfile ${ERROR_LOG:-/var/log/CTFd/error.log}
